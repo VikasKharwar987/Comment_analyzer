@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000',
-  timeout: 60000,
+  baseURL: 'https://toxicity-analyzer-backend.onrender.com',
+  timeout: 180000,
   headers: {
     'Content-Type': 'application/json',
   },

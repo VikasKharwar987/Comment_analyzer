@@ -16,7 +16,11 @@ export default function PostsPage() {
       const data = await getPosts();
       setPosts(data);
     } catch (err) {
-      setError('Failed to load posts. Please ensure the backend server is running.');
+      if (err.response && err.response.status === 500) {
+        setError('Backend Server Error (500): The Render server crashed. Reddit might be blocking your Render IP.');
+      } else {
+        setError('Failed to load posts. Please ensure the backend server is running and allows CORS.');
+      }
       console.error(err);
     } finally {
       setLoading(false);
@@ -78,7 +82,9 @@ export default function PostsPage() {
             <AlertCircle className="w-8 h-8" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-red-800 dark:text-red-300">Connection Error</h3>
+            <h3 className="text-lg font-bold text-red-800 dark:text-red-300">
+              {error.includes("Server Error") ? "Backend Server Error" : "Connection Error"}
+            </h3>
             <p className="text-red-600 dark:text-red-400 mt-1 max-w-md mx-auto">{error}</p>
           </div>
           <button 
