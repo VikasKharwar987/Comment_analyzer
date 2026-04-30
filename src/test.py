@@ -1,11 +1,8 @@
 from predict import predict
 
-texts = [
-    "You are stupid",
-    "I love this content",
-    "Go kill yourself",
-    "motherfucker shup up"
-]
+def run_test():
+    result = predict("you are stupid")
+    print("Test Output:", result)
 
-for t in texts:
-    print(t, "->", predict(t))
+if __name__ == "__main__":
+    run_test()

@@ -1,0 +1,4 @@
+model:
+  version: v1
+  path: Kharwar1011/toxicity-model-v1
+  threshold: 0.4

@@ -1,6 +1,5 @@
-torch
-transformers
 fastapi
 uvicorn
-requests
-pydantic
+transformers
+torch
+huggingface_hub
