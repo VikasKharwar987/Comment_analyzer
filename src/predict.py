@@ -10,22 +10,28 @@ headers = {
 
 
 def predict(text):
-    payload = {
-        "inputs": text
-    }
-
-    response = requests.post(API_URL, headers=headers, json=payload)
-
-    result = response.json()
-
-    # 🔥 DEBUG (optional)
-    print("HF Response:", result)
-
     try:
+        response = requests.post(API_URL, headers=headers, json={"inputs": text})
+        print("STATUS:", response.status_code)
+        print("RAW:", response.text[:200])
+
+        if response.status_code != 200 or not response.text.strip():
+            return {
+                "label": "Error",
+                "confidence_score": 0.0
+            }
+
+        try:
+            result = response.json()
+        except Exception:
+            return {
+                "label": "Error",
+                "confidence_score": 0.0
+            }
         scores = result[0]
 
         toxic_prob = 0
-
+        
         for item in scores:
             if item["label"] == "LABEL_1":
                 toxic_prob = item["score"]
@@ -37,8 +43,9 @@ def predict(text):
             "confidence_score": round(toxic_prob, 5)
         }
 
-    except Exception:
+    except Exception as e:
+        print("ERROR:", str(e))
         return {
             "label": "Error",
-            "confidence_score": 0
+            "confidence_score": 0.0
         }
