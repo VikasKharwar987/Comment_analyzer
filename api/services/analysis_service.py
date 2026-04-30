@@ -4,22 +4,24 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
 from predict import predict
+import concurrent.futures
 
 def analyze_comment(comments):
     toxic = 0
     result = []
-    for c in comments:
-        res  = predict(c)
-        if res["label"] == "Toxic":
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        predictions = list(executor.map(predict, comments))
+        
+    for c, res in zip(comments, predictions):
+        if res.get("label") == "Toxic":
             toxic += 1
             
-        conf = res["confidence_score"]
-        if res["label"] == "Safe":
-            conf = 1.0 - conf
+        conf = res.get("confidence_score", 0.0)
             
         result.append({
             "text": c,
-            "label": res["label"],
+            "label": res.get("label", "Error"),
             "confidence": conf
         })
 
