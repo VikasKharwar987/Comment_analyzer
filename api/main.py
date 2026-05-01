@@ -18,7 +18,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",
-        "https://toxicitycommentanalyzer-2apluzcmd.vercel.app/"
+        "https://toxicitycommentanalyzer-7zxneixnh.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
