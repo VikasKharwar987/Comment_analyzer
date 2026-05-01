@@ -4,7 +4,7 @@ import {
   PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend
 } from 'recharts';
 import {
-  MessageSquare, AlertOctagon, CheckCircle2, Filter, Loader2, AlertCircle, ArrowLeft, Download
+  MessageSquare, AlertOctagon, CheckCircle2, Filter, Loader2, AlertCircle, ArrowLeft
 } from 'lucide-react';
 import { getAnalysis } from '../services/api';
 import StatCard from '../components/StatCard';
