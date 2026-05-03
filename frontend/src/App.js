@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import PostsPage from './pages/PostsPage';
+import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
         <Navbar />
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<PostsPage />} />
-            <Route path="/dashboard/:id" element={<DashboardPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
           </Routes>
         </main>
       </div>

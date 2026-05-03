@@ -1,15 +1,9 @@
 from fastapi import FastAPI
-import sys
-import os
-
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
-
-
-from predict import predict
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+
 from api.routes.posts import router as posts_router
 from api.routes.analyze import router as analyze_router
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
@@ -18,7 +12,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",
-        "https://toxicitycommentanalyzer-7zxneixnh.vercel.app"
+        "https://toxicitycommentanalyzer-7zxneixnh.vercel.app",
+        "*"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -34,9 +29,9 @@ def home():
 
 @app.post("/predict")
 def predict_api(data: InputText):
-    result = predict(data.text)
-    return result
+    from predict import predict  # lazy import (better)
+    return predict(data.text)
 
+# 🔥 include routers
 app.include_router(posts_router)
 app.include_router(analyze_router)
-
