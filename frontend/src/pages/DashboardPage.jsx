@@ -219,27 +219,27 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-8">
 
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 pb-4 border-b border-border">
-        <div>
-          <div className="flex items-center gap-2 text-primary font-mono text-sm mb-2 bg-primary/10 w-fit px-3 py-1 rounded-full">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 pb-4 border-b border-border">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 text-primary font-mono text-xs sm:text-sm mb-2 bg-primary/10 w-fit px-3 py-1 rounded-full">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             Analysis Complete
           </div>
-          <h1 className="text-3xl font-bold text-text">Toxicity Dashboard</h1>
-          <p className="text-text-secondary mt-1 max-w-lg truncate" title={videoUrl}>
+          <h1 className="text-2xl sm:text-3xl font-bold text-text">Toxicity Dashboard</h1>
+          <p className="text-text-secondary mt-1 max-w-lg truncate text-sm" title={videoUrl}>
             <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{videoUrl}</a>
           </p>
         </div>
-        <Link to="/" className="flex items-center gap-2 px-4 py-2 bg-surface border border-border hover:bg-background text-text rounded-xl transition-colors text-sm font-medium">
+        <Link to="/" className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-surface border border-border hover:bg-background text-text rounded-xl transition-colors text-sm font-medium flex-shrink-0">
           <ArrowLeft className="w-4 h-4" /> Analyze Another
         </Link>
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         <StatCard title="Total Comments" value={data.total}                                   icon={MessageSquare} colorClass="bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400" />
         <StatCard title="Toxic"          value={`${data.toxic} (${pct(data.toxic)})`}          icon={AlertOctagon}  colorClass="bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400" />
         <StatCard title="Mild Toxic"     value={`${data.mild_toxic} (${pct(data.mild_toxic)})`} icon={AlertTriangle} colorClass="bg-amber-100 text-amber-600 dark:bg-amber-900/40 dark:text-amber-400" />
@@ -247,9 +247,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Pie + Bar */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <GlassCard title="Toxicity Distribution" accent="from-blue-50/40 dark:from-blue-900/10">
-          <div className="h-72 relative">
+          <div className="h-60 sm:h-72 relative">
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 pb-10">
               <span className="text-4xl font-black text-text">{data.total}</span>
               <span className="text-xs text-text-secondary uppercase tracking-widest font-semibold mt-1">Total</span>
@@ -272,7 +272,7 @@ export default function DashboardPage() {
         </GlassCard>
 
         <GlassCard title="Category Comparison" accent="from-purple-50/40 dark:from-purple-900/10">
-          <div className="h-72">
+          <div className="h-60 sm:h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={pieData} margin={{ top: 20, right: 24, left: -10, bottom: 0 }} barCategoryGap="40%">
                 <defs>
@@ -301,7 +301,7 @@ export default function DashboardPage() {
           badge={sizeLabel + ' per bucket'}
           icon={<TrendingUp className="w-5 h-5 text-primary" />}
         >
-          <div className="h-72">
+          <div className="h-56 sm:h-72">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={buckets} margin={{ top: 8, right: 20, left: -4, bottom: 0 }}>
                 <defs>
@@ -332,7 +332,7 @@ export default function DashboardPage() {
           accent="from-red-50/30 dark:from-red-900/10"
         >
           <p className="text-xs text-text-secondary mb-4">Shows what % of comments in each time period were toxic — helps spot spikes independent of volume.</p>
-          <div className="h-64">
+          <div className="h-52 sm:h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={buckets} margin={{ top: 8, right: 20, left: -4, bottom: 0 }}>
                 <CartesianGrid {...GRID} />
@@ -352,7 +352,7 @@ export default function DashboardPage() {
       )}
 
       {/* Per-category small charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <MiniChart title="Toxic Comments" dot="#ef4444" grad="cT" data={toxicRows} dataKey="toxic" name="Toxic"     xAxis={XAXIS} empty="No toxic comments" />
         <MiniChart title="Mild Toxic"     dot="#f59e0b" grad="cM" data={mildRows}  dataKey="mild"  name="Mild Toxic" xAxis={XAXIS} empty="No mild toxic comments" />
         <MiniChart title="Safe Comments"  dot="#22c55e" grad="cS" data={safeRows}  dataKey="safe"  name="Safe"      xAxis={XAXIS} empty="No safe comments" />
@@ -365,7 +365,7 @@ export default function DashboardPage() {
 /* ─── helpers ───────────────────────────────────────── */
 function GlassCard({ title, badge, icon, accent = 'from-slate-50/30 dark:from-slate-800/10', children }) {
   return (
-    <div className="bg-surface/60 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-xl border border-white/50 dark:border-slate-700/50 relative overflow-hidden group">
+    <div className="bg-surface/60 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl border border-white/50 dark:border-slate-700/50 relative overflow-hidden group">
       <div className={`absolute inset-0 bg-gradient-to-br ${accent} to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none`} />
       <div className="flex items-center justify-between mb-5 relative">
         <div className="flex items-center gap-2">

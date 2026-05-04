@@ -25,35 +25,35 @@ export default function HomePage() {
           <div className="inline-flex items-center justify-center p-4 bg-white/50 dark:bg-slate-700/50 rounded-full mb-6 shadow-inner ring-1 ring-white/60 dark:ring-slate-600/60">
             <PlayCircle className="w-12 h-12 text-red-500" />
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-slate-800 dark:text-white tracking-tight mb-4 drop-shadow-sm">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-800 dark:text-white tracking-tight mb-4 drop-shadow-sm">
             YouTube Toxicity <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500">Analyzer</span>
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-medium">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-medium">
             Paste a YouTube video link to analyze the sentiment and toxicity of its top comments using advanced machine learning models.
           </p>
         </div>
 
         <form onSubmit={handleAnalyze} className="relative mb-8">
-          <div className="relative group">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Search className="h-6 w-6 text-slate-400 group-focus-within:text-primary transition-colors" />
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="relative flex-1">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Search className="h-5 w-5 text-slate-400 group-focus-within:text-primary transition-colors" />
+              </div>
+              <input
+                type="text"
+                className="block w-full pl-12 pr-4 py-4 text-base border-2 border-white/60 dark:border-slate-600/60 rounded-2xl bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all backdrop-blur-sm shadow-inner"
+                placeholder="https://www.youtube.com/watch?v=..."
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+              />
             </div>
-            <input
-              type="text"
-              className="block w-full pl-12 pr-36 py-5 text-lg border-2 border-white/60 dark:border-slate-600/60 rounded-2xl bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all backdrop-blur-sm shadow-inner"
-              placeholder="https://www.youtube.com/watch?v=..."
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
-            <div className="absolute inset-y-2 right-2">
-              <button
-                type="submit"
-                className="flex items-center space-x-2 bg-gradient-to-r from-primary to-blue-600 hover:from-primary hover:to-blue-500 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/30 transform hover:scale-[1.02] active:scale-95"
-              >
-                <Activity className="w-5 h-5" />
-                <span>Analyze</span>
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-blue-600 hover:from-primary hover:to-blue-500 text-white px-6 py-4 rounded-2xl font-bold transition-all shadow-lg shadow-primary/30 transform hover:scale-[1.02] active:scale-95 whitespace-nowrap"
+            >
+              <Activity className="w-5 h-5" />
+              <span>Analyze</span>
+            </button>
           </div>
         </form>
 
