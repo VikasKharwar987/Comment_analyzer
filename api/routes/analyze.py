@@ -1,10 +1,12 @@
 from fastapi import APIRouter
-from api.services.reddit_service import get_comments
-from api.services.analysis_service import analyze_comment
+
+from api.services.youtube_service import fetch_youtube_comments
+from api.services.analysis_service import analyze_comments
 
 router = APIRouter()
 
-@router.get("/analyze/{post_id}")
-def analyze_post(post_id: str):
-    comments = get_comments(post_id)
-    return analyze_comment(comments) 
+@router.get("/analyze")
+async def analyze_post(video_url: str):
+    comments = await fetch_youtube_comments(video_url)
+    result = analyze_comments(comments)
+    return result

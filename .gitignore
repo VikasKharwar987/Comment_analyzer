@@ -21,3 +21,6 @@ yarn-error.log*
 /data
 /notebooks/.ipynb_checkpoints
 /results
+src/toxicity_xlmr/
+src/logs/
+src/results/
